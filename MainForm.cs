@@ -171,5 +171,11 @@ namespace buff_timer
         {
             timerLabel.Text = timeLeft.ToMMSSString();
         }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            _trayIcon.Dispose();
+        }
     }
 }
