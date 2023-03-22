@@ -69,6 +69,7 @@
             StartPosition = FormStartPosition.Manual;
             Text = "MainForm";
             TopMost = true;
+            MouseDown += MainForm_MouseDown;
             ResumeLayout(false);
             PerformLayout();
         }
