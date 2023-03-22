@@ -43,6 +43,7 @@
             timerLabel.Size = new Size(49, 21);
             timerLabel.TabIndex = 0;
             timerLabel.Text = "02:39";
+            timerLabel.MouseDown += OnMouseDown;
             // 
             // MainForm
             // 
@@ -69,7 +70,7 @@
             StartPosition = FormStartPosition.Manual;
             Text = "MainForm";
             TopMost = true;
-            MouseDown += MainForm_MouseDown;
+            MouseDown += OnMouseDown;
             ResumeLayout(false);
             PerformLayout();
         }

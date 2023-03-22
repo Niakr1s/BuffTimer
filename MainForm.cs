@@ -186,7 +186,7 @@ namespace buff_timer
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        private void OnMouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
