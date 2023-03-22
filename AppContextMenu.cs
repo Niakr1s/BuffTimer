@@ -23,6 +23,7 @@
 
         public event EventHandler<BuffTimerType>? SelectedBuffTimerChanged;
         public event EventHandler? ExitRequested;
+        public event EventHandler? BeepOptionsRequested;
 
         public AppContextMenu(BuffTimerType selectedBuffTimerType = BuffTimerType.Buff) : base()
         {
@@ -41,7 +42,15 @@
             UpdateBuffTimerMenuItems();
 
             this.Items.Add(new ToolStripSeparator());
+            this.Items.Add(new ToolStripMenuItem("Beep options", null, OnBeepOptionsClick));
+
+            this.Items.Add(new ToolStripSeparator());
             this.Items.Add(new ToolStripMenuItem("Exit", null, OnExitClick));
+        }
+
+        private void OnBeepOptionsClick(object? sender, EventArgs e)
+        {
+            BeepOptionsRequested?.Invoke(this, new());
         }
 
         private void OnExitClick(object? sender, EventArgs e)
