@@ -114,7 +114,7 @@ namespace buff_timer
 
         private void UpdateTimerInfo(TimeSpan timeLeft)
         {
-            timerLabel.Text = timeLeft.ToString(@"mm\:ss");
+            timerLabel.Text = timeLeft.ToMMSSString();
         }
     }
 }
