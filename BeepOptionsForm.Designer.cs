@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BeepOptionsForm));
             everyTickLabel = new Label();
             everyTickBar = new TrackBar();
             everySecondLabel = new Label();
@@ -81,6 +82,7 @@
             Controls.Add(everyTickBar);
             Controls.Add(everyTickLabel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "BeepOptionsForm";

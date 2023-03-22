@@ -19,6 +19,21 @@ namespace buff_timer
         private readonly NotifyIcon _trayIcon;
 
         private BeepOptions _beepOptions;
+        public BeepOptions BeepOptions
+        {
+            get => _beepOptions;
+            set
+            {
+                if (_beepOptions == value)
+                {
+                    return;
+                }
+
+                _beepOptions = value;
+                Config.BeepOptions = value;
+            }
+        }
+
         private readonly Beeper _beeper;
 
         public BuffTimerType BuffTimerType
@@ -32,14 +47,18 @@ namespace buff_timer
                 }
 
                 _buffTimerType = value;
+                Config.BuffTimerType = value;
                 TimerRestart();
             }
         }
+
 
         public MainForm()
         {
             InitializeComponent();
             _beeper = new DefaultBeeper();
+            _buffTimerType = Config.BuffTimerType;
+            _beepOptions = Config.BeepOptions;
 
             AppContextMenu contextMenu = new AppContextMenu(_buffTimerType);
             contextMenu.ExitRequested += ContextMenu_ExitRequested;
@@ -57,16 +76,14 @@ namespace buff_timer
             };
             BindKeyboard();
 
-            _beepOptions = BeepOptions.Default();
-
             TimerRestart();
         }
 
         private void ContextMenu_BeepOptionsRequested(object? sender, EventArgs e)
         {
-            BeepOptionsForm beepOptionsForm = new(_beepOptions);
+            BeepOptionsForm beepOptionsForm = new(BeepOptions);
             beepOptionsForm.ShowDialog();
-            _beepOptions = beepOptionsForm.BeepOptions;
+            BeepOptions = beepOptionsForm.BeepOptions;
         }
 
         private void ContextMenu_SelectedBuffTimerChanged(object? sender, BuffTimerType e)
@@ -133,15 +150,15 @@ namespace buff_timer
 
         private bool ShouldBeep(TimeSpan timeLeft)
         {
-            if (timeLeft <= _buffTimerType.Duration() / _beepOptions.Ticks * _beepOptions.BeepEverySecondAfter)
+            if (timeLeft <= _buffTimerType.Duration() / BeepOptions.Ticks * BeepOptions.BeepEverySecondAfter)
             {
                 return true;
             }
             else
             {
-                for (int i = 0; i <= _beepOptions.BeepEveryTickAfter; i++)
+                for (int i = 0; i <= BeepOptions.BeepEveryTickAfter; i++)
                 {
-                    if (_buffTimerType.Duration() / _beepOptions.Ticks * i == timeLeft)
+                    if (_buffTimerType.Duration() / BeepOptions.Ticks * i == timeLeft)
                     {
                         return true;
                     }
