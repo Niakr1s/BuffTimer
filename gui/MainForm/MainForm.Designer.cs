@@ -32,6 +32,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             timerLabel = new Label();
             summaryTooltip = new ToolTip(components);
+            contextMenu = new ContextMenuStrip(components);
+            restartToolStripMenuItem = new ToolStripMenuItem();
+            stopTimerToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            optionsToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            contextMenu.SuspendLayout();
             SuspendLayout();
             // 
             // timerLabel
@@ -46,6 +54,56 @@
             timerLabel.TabIndex = 0;
             timerLabel.Text = "02:39";
             timerLabel.MouseDown += OnMouseDown;
+            // 
+            // summaryTooltip
+            // 
+            summaryTooltip.Popup += summaryTooltip_Popup;
+            // 
+            // contextMenu
+            // 
+            contextMenu.Items.AddRange(new ToolStripItem[] { restartToolStripMenuItem, stopTimerToolStripMenuItem, toolStripSeparator1, optionsToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
+            contextMenu.Name = "contextMenu";
+            contextMenu.Size = new Size(181, 126);
+            contextMenu.Opening += contextMenu_Opening;
+            contextMenu.Opened += contextMenu_Opened;
+            // 
+            // restartToolStripMenuItem
+            // 
+            restartToolStripMenuItem.Name = "restartToolStripMenuItem";
+            restartToolStripMenuItem.Size = new Size(180, 22);
+            restartToolStripMenuItem.Text = "Restart Timer";
+            restartToolStripMenuItem.Click += restartToolStripMenuItem_Click;
+            // 
+            // stopTimerToolStripMenuItem
+            // 
+            stopTimerToolStripMenuItem.Name = "stopTimerToolStripMenuItem";
+            stopTimerToolStripMenuItem.Size = new Size(180, 22);
+            stopTimerToolStripMenuItem.Text = "Stop Timer";
+            stopTimerToolStripMenuItem.Click += stopTimerToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(177, 6);
+            // 
+            // optionsToolStripMenuItem
+            // 
+            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            optionsToolStripMenuItem.Size = new Size(180, 22);
+            optionsToolStripMenuItem.Text = "Options";
+            optionsToolStripMenuItem.Click += optionsToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(177, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -73,6 +131,7 @@
             Text = "MainForm";
             TopMost = true;
             MouseDown += OnMouseDown;
+            contextMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -81,5 +140,12 @@
 
         private Label timerLabel;
         private ToolTip summaryTooltip;
+        private ContextMenuStrip contextMenu;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem optionsToolStripMenuItem;
+        private ToolStripMenuItem restartToolStripMenuItem;
+        private ToolStripMenuItem stopTimerToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator toolStripSeparator2;
     }
 }

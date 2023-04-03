@@ -47,10 +47,6 @@ namespace buff_timer
             _options = Config.Options;
             UpdateTimerToolTip();
 
-            AppContextMenu contextMenu = new AppContextMenu();
-            contextMenu.ExitRequested += ContextMenu_ExitRequested;
-            contextMenu.BeepOptionsRequested += ContextMenu_OptionsRequested;
-
             ContextMenuStrip = contextMenu;
 
             _keyHook = Hook.GlobalEvents();
@@ -62,18 +58,6 @@ namespace buff_timer
             BindKeyboard();
 
             TimerRestart();
-        }
-
-        private void ContextMenu_OptionsRequested(object? sender, EventArgs e)
-        {
-            OptionsForm optionsForm = new(Options);
-            optionsForm.ShowDialog();
-            Options = optionsForm.Options;
-        }
-
-        private void ContextMenu_ExitRequested(object? sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void BindKeyboard()
@@ -152,6 +136,48 @@ namespace buff_timer
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
+        }
+
+
+        private void contextMenu_Opened(object sender, EventArgs e)
+        {
+            summaryTooltip.Active = false;
+        }
+
+        private void contextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            summaryTooltip.Active = false;
+        }
+
+        private void summaryTooltip_Popup(object sender, PopupEventArgs e)
+        {
+            if (ContextMenuStrip?.Visible != true)
+            {
+                return;
+            }
+            e.Cancel = true;
+        }
+
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TimerRestart();
+        }
+
+        private void stopTimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TimerStop();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OptionsForm optionsForm = new(Options);
+            optionsForm.ShowDialog();
+            Options = optionsForm.Options;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
