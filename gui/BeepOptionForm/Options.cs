@@ -36,5 +36,11 @@
                 BeepInterval = TimeSpan.FromSeconds(1);
             }
         }
+
+        public string ToSummaryString()
+        {
+            return
+                 $"Summary:\nTimer will last for {Duration};\nwhen {BeepLast} remains, will beep each {BeepInterval}";
+        }
     }
 }

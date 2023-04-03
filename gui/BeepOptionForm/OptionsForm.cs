@@ -20,8 +20,7 @@ namespace buff_timer
             beepIntervalSecondsBar.Maximum = 5;
             beepIntervalSecondsBar.Value = (int)options.BeepInterval.TotalSeconds;
 
-            summaryLabel.Text =
-                $"Summary:\nTimer will last for {options.Duration};\nwhen {options.BeepLast} remains, will beep each {options.BeepInterval}";
+            summaryLabel.Text = options.ToSummaryString();
         }
 
         private void timerDurationMinutesNumericUpDown_ValueChanged(object sender, EventArgs e)
