@@ -24,14 +24,18 @@ namespace buff_timer
             get => _options;
             set
             {
-                if (_options == value)
+                bool durationChanged = _options.Duration != value.Duration;
+
+                if (_options != value)
                 {
-                    return;
+                    _options = value;
+                    Config.Options = value;
                 }
 
-                _options = value;
-                Config.Options = value;
-                TimerRestart();
+                if (durationChanged)
+                {
+                    TimerRestart();
+                }
             }
         }
 
@@ -129,17 +133,11 @@ namespace buff_timer
 
         private bool ShouldBeep(TimeSpan timeLeft)
         {
-            if (timeLeft == Options.BeepLast || timeLeft == TimeSpan.Zero)
-            {
-                return true;
-            }
-
-            if (timeLeft < Options.BeepLast) // TODO: 
-            {
-                return true;
-            }
-
-            return false;
+            TimeSpan timeDiff = Options.BeepLast - timeLeft;
+            return
+                timeLeft == Options.BeepLast ||
+                timeLeft == TimeSpan.Zero ||
+                (timeLeft < Options.BeepLast && (timeDiff.TotalSeconds % Options.BeepInterval.TotalSeconds == 0));
         }
 
         private void UpdateTimerInfo(TimeSpan timeLeft)
