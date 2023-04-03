@@ -17,15 +17,5 @@
                 Properties.Settings.Default.Save();
             }
         }
-
-        internal static BuffTimerType BuffTimerType
-        {
-            get => (BuffTimerType)Properties.Settings.Default.BuffTimerType;
-            set
-            {
-                Properties.Settings.Default.BuffTimerType = ((int)value);
-                Properties.Settings.Default.Save();
-            }
-        }
     }
 }

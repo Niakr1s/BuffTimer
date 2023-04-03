@@ -14,7 +14,7 @@ namespace buff_timer
         private readonly Dictionary<BuffTimerActions, Keys> _keyActions;
 
         private BuffTimer? _buffTimer;
-        private BuffTimerType _buffTimerType = BuffTimerType.Dance;
+        private TimeSpan _buffTimerDuration = TimeSpan.FromMinutes(20);
 
         private readonly NotifyIcon _trayIcon;
 
@@ -36,33 +36,15 @@ namespace buff_timer
 
         private readonly Beeper _beeper;
 
-        public BuffTimerType BuffTimerType
-        {
-            get => _buffTimerType;
-            set
-            {
-                if (_buffTimerType == value)
-                {
-                    return;
-                }
-
-                _buffTimerType = value;
-                Config.BuffTimerType = value;
-                TimerRestart();
-            }
-        }
-
 
         public MainForm()
         {
             InitializeComponent();
             _beeper = new DefaultBeeper();
-            _buffTimerType = Config.BuffTimerType;
             _beepOptions = Config.BeepOptions;
 
-            AppContextMenu contextMenu = new AppContextMenu(_buffTimerType);
+            AppContextMenu contextMenu = new AppContextMenu();
             contextMenu.ExitRequested += ContextMenu_ExitRequested;
-            contextMenu.SelectedBuffTimerChanged += ContextMenu_SelectedBuffTimerChanged;
             contextMenu.BeepOptionsRequested += ContextMenu_BeepOptionsRequested;
 
             ContextMenuStrip = contextMenu;
@@ -84,11 +66,6 @@ namespace buff_timer
             BeepOptionsForm beepOptionsForm = new(BeepOptions);
             beepOptionsForm.ShowDialog();
             BeepOptions = beepOptionsForm.BeepOptions;
-        }
-
-        private void ContextMenu_SelectedBuffTimerChanged(object? sender, BuffTimerType e)
-        {
-            BuffTimerType = e;
         }
 
         private void ContextMenu_ExitRequested(object? sender, EventArgs e)
@@ -130,7 +107,7 @@ namespace buff_timer
         {
             TimerStop();
 
-            _buffTimer = new(BuffTimerType);
+            _buffTimer = new(_buffTimerDuration);
             _buffTimer.Tick += Timer_Tick;
 
             UpdateTimerInfo(_buffTimer.TimeLeft);
@@ -150,7 +127,7 @@ namespace buff_timer
 
         private bool ShouldBeep(TimeSpan timeLeft)
         {
-            if (timeLeft <= _buffTimerType.Duration() / BeepOptions.Ticks * BeepOptions.BeepEverySecondAfter)
+            if (timeLeft <= _buffTimerDuration.Duration() / BeepOptions.Ticks * BeepOptions.BeepEverySecondAfter)
             {
                 return true;
             }
@@ -158,7 +135,7 @@ namespace buff_timer
             {
                 for (int i = 0; i <= BeepOptions.BeepEveryTickAfter; i++)
                 {
-                    if (_buffTimerType.Duration() / BeepOptions.Ticks * i == timeLeft)
+                    if (_buffTimerDuration.Duration() / BeepOptions.Ticks * i == timeLeft)
                     {
                         return true;
                     }

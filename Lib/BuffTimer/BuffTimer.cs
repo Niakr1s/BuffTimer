@@ -50,10 +50,6 @@
             _timer.Elapsed += Timer_Elapsed;
         }
 
-        public BuffTimer(BuffTimerType buffTimerType) : this(buffTimerType.Duration())
-        {
-        }
-
         private void Timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             TimeLeft = TimeLeft.Subtract(_timerTick);
