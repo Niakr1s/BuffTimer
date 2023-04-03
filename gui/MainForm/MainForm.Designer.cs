@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             timerLabel = new Label();
+            summaryTooltip = new ToolTip(components);
             SuspendLayout();
             // 
             // timerLabel
@@ -78,5 +80,6 @@
         #endregion
 
         private Label timerLabel;
+        private ToolTip summaryTooltip;
     }
 }

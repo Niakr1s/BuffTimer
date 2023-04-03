@@ -45,6 +45,7 @@ namespace buff_timer
             InitializeComponent();
             _beeper = new DefaultBeeper();
             _options = Config.Options;
+            UpdateTimerToolTip();
 
             AppContextMenu contextMenu = new AppContextMenu();
             contextMenu.ExitRequested += ContextMenu_ExitRequested;
@@ -120,6 +121,7 @@ namespace buff_timer
         private void Timer_Tick(object? sender, BuffTimerTickEventArgs e)
         {
             Invoke(UpdateTimerInfo, e.TimeLeft);
+            Invoke(UpdateTimerToolTip);
 
             if (ShouldBeep(e.TimeLeft))
             {
@@ -139,6 +141,11 @@ namespace buff_timer
         private void UpdateTimerInfo(TimeSpan timeLeft)
         {
             timerLabel.Text = timeLeft.ToMMSSString();
+        }
+
+        private void UpdateTimerToolTip()
+        {
+            summaryTooltip.SetToolTip(timerLabel, Options.ToSummaryString());
         }
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
