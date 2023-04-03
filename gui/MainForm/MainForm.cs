@@ -76,17 +76,6 @@ namespace buff_timer
             this.Close();
         }
 
-        private NotifyIcon InitializeTrayIcon(ContextMenuStrip contextMenu)
-        {
-            NotifyIcon trayIcon = new()
-            {
-                Icon = Icon,
-                ContextMenuStrip = contextMenu,
-                Visible = true
-            };
-            return trayIcon;
-        }
-
         private void BindKeyboard()
         {
             _keyHook.OnCombination(new Dictionary<Combination, Action>() {
