@@ -16,8 +16,6 @@ namespace buff_timer
 
         private BuffTimer? _buffTimer;
 
-        private readonly NotifyIcon _trayIcon;
-
         private Options _options;
         public Options Options
         {
@@ -53,7 +51,6 @@ namespace buff_timer
             contextMenu.BeepOptionsRequested += ContextMenu_OptionsRequested;
 
             ContextMenuStrip = contextMenu;
-            _trayIcon = InitializeTrayIcon(contextMenu);
 
             _keyHook = Hook.GlobalEvents();
             _keyActions = new Dictionary<BuffTimerActions, Keys>()
@@ -75,7 +72,6 @@ namespace buff_timer
 
         private void ContextMenu_ExitRequested(object? sender, EventArgs e)
         {
-            _trayIcon.Dispose();
             this.Close();
         }
 
@@ -143,12 +139,6 @@ namespace buff_timer
         private void UpdateTimerInfo(TimeSpan timeLeft)
         {
             timerLabel.Text = timeLeft.ToMMSSString();
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            _trayIcon.Dispose();
         }
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
