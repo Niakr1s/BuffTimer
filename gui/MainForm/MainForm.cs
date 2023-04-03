@@ -121,6 +121,7 @@ namespace buff_timer
             summaryTooltip.SetToolTip(timerLabel, Options.ToSummaryString());
         }
 
+        #region move window with mouse
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -137,8 +138,9 @@ namespace buff_timer
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+        #endregion
 
-
+        #region tooltip fixes
         private void contextMenu_Opened(object sender, EventArgs e)
         {
             summaryTooltip.Active = false;
@@ -157,7 +159,9 @@ namespace buff_timer
             }
             e.Cancel = true;
         }
+        #endregion
 
+        #region context menu bindings
         private void restartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TimerRestart();
@@ -179,5 +183,6 @@ namespace buff_timer
         {
             Close();
         }
+        #endregion
     }
 }
