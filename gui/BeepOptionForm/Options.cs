@@ -20,6 +20,21 @@
             {
                 BeepLast = Duration;
             }
+
+            if (Duration == TimeSpan.Zero)
+            {
+                Duration = TimeSpan.FromSeconds(1);
+            }
+
+            if (BeepLast == TimeSpan.Zero)
+            {
+                BeepLast = TimeSpan.FromSeconds(1);
+            }
+
+            if (BeepInterval == TimeSpan.Zero)
+            {
+                BeepInterval = TimeSpan.FromSeconds(1);
+            }
         }
     }
 }

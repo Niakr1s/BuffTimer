@@ -54,10 +54,12 @@
             // 
             beepLastSecondsBar.Location = new Point(12, 74);
             beepLastSecondsBar.Maximum = 20;
+            beepLastSecondsBar.Minimum = 1;
             beepLastSecondsBar.Name = "beepLastSecondsBar";
             beepLastSecondsBar.Size = new Size(267, 45);
             beepLastSecondsBar.TabIndex = 8;
             beepLastSecondsBar.TickStyle = TickStyle.None;
+            beepLastSecondsBar.Value = 1;
             beepLastSecondsBar.ValueChanged += beepLastSecondsBar_ValueChanged;
             // 
             // beepIntervalLabel
@@ -74,9 +76,11 @@
             // 
             beepIntervalSecondsBar.Location = new Point(12, 149);
             beepIntervalSecondsBar.Maximum = 20;
+            beepIntervalSecondsBar.Minimum = 1;
             beepIntervalSecondsBar.Name = "beepIntervalSecondsBar";
             beepIntervalSecondsBar.Size = new Size(267, 45);
             beepIntervalSecondsBar.TabIndex = 9;
+            beepIntervalSecondsBar.Value = 1;
             beepIntervalSecondsBar.ValueChanged += beepIntervalSecondsBar_ValueChanged;
             // 
             // timerDurationMinutesNumericUpDown
