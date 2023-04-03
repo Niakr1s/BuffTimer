@@ -25,49 +25,37 @@ namespace buff_timer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int BeepOptions_Ticks {
+        [global::System.Configuration.DefaultSettingValueAttribute("00:20:00")]
+        public global::System.TimeSpan Duration {
             get {
-                return ((int)(this["BeepOptions_Ticks"]));
+                return ((global::System.TimeSpan)(this["Duration"]));
             }
             set {
-                this["BeepOptions_Ticks"] = value;
+                this["Duration"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int BeepOptions_BeepEveryTickAfter {
+        [global::System.Configuration.DefaultSettingValueAttribute("00:03:00")]
+        public global::System.TimeSpan BeepLast {
             get {
-                return ((int)(this["BeepOptions_BeepEveryTickAfter"]));
+                return ((global::System.TimeSpan)(this["BeepLast"]));
             }
             set {
-                this["BeepOptions_BeepEveryTickAfter"] = value;
+                this["BeepLast"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int BeepOptions_BeepEverySecondAfter {
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:03")]
+        public global::System.TimeSpan BeepInterval {
             get {
-                return ((int)(this["BeepOptions_BeepEverySecondAfter"]));
+                return ((global::System.TimeSpan)(this["BeepInterval"]));
             }
             set {
-                this["BeepOptions_BeepEverySecondAfter"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int BuffTimerType {
-            get {
-                return ((int)(this["BuffTimerType"]));
-            }
-            set {
-                this["BuffTimerType"] = value;
+                this["BeepInterval"] = value;
             }
         }
     }

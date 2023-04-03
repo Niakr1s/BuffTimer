@@ -2,17 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="buff_timer.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="BeepOptions_Ticks" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">20</Value>
+    <Setting Name="Duration" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:20:00</Value>
     </Setting>
-    <Setting Name="BeepOptions_BeepEveryTickAfter" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+    <Setting Name="BeepLast" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:03:00</Value>
     </Setting>
-    <Setting Name="BeepOptions_BeepEverySecondAfter" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="BuffTimerType" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="BeepInterval" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:03</Value>
     </Setting>
   </Settings>
 </SettingsFile>

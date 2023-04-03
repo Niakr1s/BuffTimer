@@ -1,19 +1,21 @@
-﻿namespace buff_timer
+﻿using buff_timer.gui.BeepOptionForm;
+
+namespace buff_timer
 {
     internal static class Config
     {
-        internal static BeepOptions BeepOptions
+        internal static Options Options
         {
             get => new(
-                    Properties.Settings.Default.BeepOptions_Ticks,
-                    Properties.Settings.Default.BeepOptions_BeepEveryTickAfter,
-                    Properties.Settings.Default.BeepOptions_BeepEverySecondAfter
+                    Properties.Settings.Default.Duration,
+                    Properties.Settings.Default.BeepLast,
+                    Properties.Settings.Default.BeepInterval
                     );
             set
             {
-                Properties.Settings.Default.BeepOptions_Ticks = value.Ticks;
-                Properties.Settings.Default.BeepOptions_BeepEveryTickAfter = value.BeepEveryTickAfter;
-                Properties.Settings.Default.BeepOptions_BeepEverySecondAfter = value.BeepEverySecondAfter;
+                Properties.Settings.Default.Duration = value.Duration;
+                Properties.Settings.Default.BeepLast = value.BeepLast;
+                Properties.Settings.Default.BeepInterval = value.BeepInterval;
                 Properties.Settings.Default.Save();
             }
         }

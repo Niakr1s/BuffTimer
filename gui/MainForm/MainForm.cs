@@ -1,3 +1,4 @@
+using buff_timer.gui.BeepOptionForm;
 using Gma.System.MouseKeyHook;
 
 namespace buff_timer
@@ -14,23 +15,23 @@ namespace buff_timer
         private readonly Dictionary<BuffTimerActions, Keys> _keyActions;
 
         private BuffTimer? _buffTimer;
-        private TimeSpan _buffTimerDuration = TimeSpan.FromMinutes(20);
 
         private readonly NotifyIcon _trayIcon;
 
-        private BeepOptions _beepOptions;
-        public BeepOptions BeepOptions
+        private Options _options;
+        public Options Options
         {
-            get => _beepOptions;
+            get => _options;
             set
             {
-                if (_beepOptions == value)
+                if (_options == value)
                 {
                     return;
                 }
 
-                _beepOptions = value;
-                Config.BeepOptions = value;
+                _options = value;
+                Config.Options = value;
+                TimerRestart();
             }
         }
 
@@ -41,11 +42,11 @@ namespace buff_timer
         {
             InitializeComponent();
             _beeper = new DefaultBeeper();
-            _beepOptions = Config.BeepOptions;
+            _options = Config.Options;
 
             AppContextMenu contextMenu = new AppContextMenu();
             contextMenu.ExitRequested += ContextMenu_ExitRequested;
-            contextMenu.BeepOptionsRequested += ContextMenu_BeepOptionsRequested;
+            contextMenu.BeepOptionsRequested += ContextMenu_OptionsRequested;
 
             ContextMenuStrip = contextMenu;
             _trayIcon = InitializeTrayIcon(contextMenu);
@@ -61,11 +62,11 @@ namespace buff_timer
             TimerRestart();
         }
 
-        private void ContextMenu_BeepOptionsRequested(object? sender, EventArgs e)
+        private void ContextMenu_OptionsRequested(object? sender, EventArgs e)
         {
-            BeepOptionsForm beepOptionsForm = new(BeepOptions);
-            beepOptionsForm.ShowDialog();
-            BeepOptions = beepOptionsForm.BeepOptions;
+            OptionsForm optionsForm = new(Options);
+            optionsForm.ShowDialog();
+            Options = optionsForm.Options;
         }
 
         private void ContextMenu_ExitRequested(object? sender, EventArgs e)
@@ -103,11 +104,12 @@ namespace buff_timer
             }
         }
 
+
         private void TimerRestart()
         {
             TimerStop();
 
-            _buffTimer = new(_buffTimerDuration);
+            _buffTimer = new(_options.Duration);
             _buffTimer.Tick += Timer_Tick;
 
             UpdateTimerInfo(_buffTimer.TimeLeft);
@@ -127,20 +129,16 @@ namespace buff_timer
 
         private bool ShouldBeep(TimeSpan timeLeft)
         {
-            if (timeLeft <= _buffTimerDuration.Duration() / BeepOptions.Ticks * BeepOptions.BeepEverySecondAfter)
+            if (timeLeft == Options.BeepLast || timeLeft == TimeSpan.Zero)
             {
                 return true;
             }
-            else
+
+            if (timeLeft < Options.BeepLast) // TODO: 
             {
-                for (int i = 0; i <= BeepOptions.BeepEveryTickAfter; i++)
-                {
-                    if (_buffTimerDuration.Duration() / BeepOptions.Ticks * i == timeLeft)
-                    {
-                        return true;
-                    }
-                }
+                return true;
             }
+
             return false;
         }
 
