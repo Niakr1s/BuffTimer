@@ -61,7 +61,7 @@
             // 
             // contextMenu
             // 
-            contextMenu.Items.AddRange(new ToolStripItem[] { restartToolStripMenuItem, stopTimerToolStripMenuItem, toolStripSeparator1, optionsToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
+            contextMenu.Items.AddRange(new ToolStripItem[] { stopTimerToolStripMenuItem, restartToolStripMenuItem, toolStripSeparator1, optionsToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
             contextMenu.Name = "contextMenu";
             contextMenu.Size = new Size(181, 126);
             contextMenu.Opening += contextMenu_Opening;
@@ -71,14 +71,14 @@
             // 
             restartToolStripMenuItem.Name = "restartToolStripMenuItem";
             restartToolStripMenuItem.Size = new Size(180, 22);
-            restartToolStripMenuItem.Text = "Restart Timer";
+            restartToolStripMenuItem.Text = "Restart (F12)";
             restartToolStripMenuItem.Click += restartToolStripMenuItem_Click;
             // 
             // stopTimerToolStripMenuItem
             // 
             stopTimerToolStripMenuItem.Name = "stopTimerToolStripMenuItem";
             stopTimerToolStripMenuItem.Size = new Size(180, 22);
-            stopTimerToolStripMenuItem.Text = "Stop Timer";
+            stopTimerToolStripMenuItem.Text = "Stop (F11)";
             stopTimerToolStripMenuItem.Click += stopTimerToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
